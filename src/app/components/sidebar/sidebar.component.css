@@ -1,0 +1,11 @@
+.nav li.active>a{
+  background-color: #c8c9cb;
+  box-shadow: 0 1px 15px 1px #003dd91a;
+}
+
+.logo {
+  background-color: #eee;
+}
+.sidebar-wrapper{
+  background: #eee;
+}

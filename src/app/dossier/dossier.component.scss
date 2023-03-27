@@ -1,0 +1,36 @@
+.tt{
+  background: #0a3e5c;
+}
+.card .avatar{
+
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 0%;
+}
+.card-user .avatar {
+  width: 124px;
+  height: 124px;
+  border: 0px solid #FFFFFF;
+  position: relative;
+}
+.card-user .card-body {
+  min-height: 100px;
+}
+.description{
+  color : black;
+}
+
+.main-content{
+  margin-top: 20px;
+}
+.disabled {
+  cursor: not-allowed;
+}
+
+.pointer{
+  cursor: pointer;
+}
+.c4{
+  margin-top: 0px;
+}
