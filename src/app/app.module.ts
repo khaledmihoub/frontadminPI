@@ -15,10 +15,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './login/login.component';
 
 import {MatNativeDateModule} from '@angular/material/core';
+import jwt_decode from "jwt-decode";
+import { CookieService } from 'ngx-cookie-service';
+import { ResetComponent } from './loginreset/reset/reset.component';
+import { ResetpasswordComponent } from './loginreset/resetpassword/resetpassword.component';
 
-
-
-
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 @NgModule({
   imports: [
 
@@ -31,17 +35,21 @@ import {MatNativeDateModule} from '@angular/material/core';
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+
+
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    ResetComponent,
+    ResetpasswordComponent,
 
 
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

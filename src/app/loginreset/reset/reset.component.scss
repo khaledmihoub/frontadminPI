@@ -3,10 +3,31 @@
   border-style: solid;
   border-bottom-width: 2px;
 }
+.sp{
+  color: #0ec646;
+    font-size: 15px;
+}
 .c{
   margin-top: 0;
 }
+.spinner {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left-color: rgb(255, 76, 53);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  display: none;
 
+}
+.show {
+  display: block;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .bg-img
 {
   min-height: 100vh;
@@ -90,10 +111,7 @@ body {
   outline: none;
   background: transparent;
 }
-.sp{
-  color: #f8ebeb;
-    font-size: 10px;
-}
+
 .login-box .user-box .input-f {
   width: 100%;
   padding: 10px 0;
