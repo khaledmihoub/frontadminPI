@@ -13,8 +13,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/post', title: 'Posts',  icon:'users_single-02', class: '' },
     { path: '/event', title: 'Event',  icon:'users_single-02', class: '' },
     { path: '/order', title: 'Order',  icon:'users_single-02', class: '' },
-    { path: '/pot', title: 'Pot',  icon:'users_single-02', class: '' },
-    { path: '/claim', title: 'Claim',  icon:'users_single-02', class: '' },
+    { path: '/pot', title: 'Pot',  icon:'business_money-coins', class: '' },
+    { path: '/claim', title: 'Claim',  icon:'files_paper', class: '' },
 
 ];
 
