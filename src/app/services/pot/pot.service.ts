@@ -36,7 +36,7 @@ export class PotService {
   {
 
 
-    return this.http.put<any>(this.baseUrl+"/pot/deletewithstate/"+data,{
+    return this.http.get<any>(this.baseUrl+"/pot/deletewithstate/"+data, {
       headers:new HttpHeaders({ authorization : 'Bearer '+token })
     })
   }

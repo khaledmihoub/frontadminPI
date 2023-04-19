@@ -16,6 +16,7 @@ export class PotComponent implements OnInit {
   constructor(private potService: PotService, private cs:CookiesService ) {
         //get token in constructeur and pass it to APIs
     this.jwt=this.cs.getCookieJWT().toString();
+    this.id=this.cs.getCookieIDUser();
      //console.log(this.jwt);
 
    }
@@ -24,6 +25,7 @@ export class PotComponent implements OnInit {
   pots: any[];
   today: string;
   currentpot:any;
+  id:number;
 
   addform = new FormGroup({
     title: new FormControl('', []),
@@ -76,7 +78,7 @@ openModal(pot: any) {
 }
   addpot() {
       let data=(this.addform.value);
-      data.user = { idUser: 1 };
+      data.user = { idUser: this.id };
       console.log(data);
 
       this.potService.addpot(data,this.jwt).subscribe(res=>{

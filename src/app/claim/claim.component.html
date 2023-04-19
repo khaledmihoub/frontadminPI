@@ -51,7 +51,7 @@
                     <ng-container *ngIf="claim.reference.startsWith('C')">Claim</ng-container>
                     <ng-container *ngIf="claim.reference.startsWith('POT')">Pot</ng-container>
                     <ng-container *ngIf="claim.reference.startsWith('POST')">Post</ng-container>
-                    <ng-container *ngIf="claim.reference.startsWith('PRODUCT')">Product</ng-container>
+                    <ng-container *ngIf="claim.reference.startsWith('PROD')">Product</ng-container>
                     <ng-container *ngIf="claim.reference.startsWith('EVENT')">Event</ng-container>
                   </td>
                   <td>
@@ -124,35 +124,33 @@
   </div>
 </div>
 
-
   <div bsModal #mychatModal="bs-modal" class="modal fade modal-bottom-right" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
   aria-hidden="true" style="padding-left: 17px;">
 
    <div class="modal-dialog modal-bottom-right" role="document">
     <div class="modal-content m">
       <form [formGroup]="sendmail" (ngSubmit)="send()">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" aria-describedby="modal-title" (click)="mychatModal.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" aria-describedby="modal-title" (click)="mychatModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control"  id="recipient-name" formControlName="email">
+            <input type="text" class="form-control" id="recipient-name" formControlName="email" readonly>
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label txt">Message:</label>
-            <textarea class="form-control" placeholder="Type here.." id="message-text" formControlName="message"></textarea>
+            <textarea class="form-control" placeholder="Type here.." id="message-text" formControlName="message" style="resize: vertical; height: 250px;"></textarea>
           </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"  (click)="mychatModal.hide()">Close</button>
-        <button type="submit" class="btn btn-primary m">Send message</button>
-      </div>
-    </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="mychatModal.hide()">Close</button>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </div>
+      </form>
     </div>
 
   </div>
