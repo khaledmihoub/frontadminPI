@@ -21,8 +21,15 @@ import { ToastComponent } from './toast/toast.component';
 
 
 
+import {MatNativeDateModule} from '@angular/material/core';
+import jwt_decode from "jwt-decode";
+import { CookieService } from 'ngx-cookie-service';
+import { ResetComponent } from './loginreset/reset/reset.component';
+import { ResetpasswordComponent } from './loginreset/resetpassword/resetpassword.component';
 
-
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   imports: [
@@ -35,11 +42,13 @@ import { ToastComponent } from './toast/toast.component';
     ReactiveFormsModule,
     NgbModule,
     ToastrModule.forRoot(),
+
     MatDialogModule,
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
     MatButtonModule
+
   ],
   declarations: [
     AppComponent,
@@ -47,11 +56,14 @@ import { ToastComponent } from './toast/toast.component';
     LoginComponent,
     ProductDetailsComponent,
     ToastComponent,
+    ResetComponent,
+    ResetpasswordComponent,
+
 
 
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

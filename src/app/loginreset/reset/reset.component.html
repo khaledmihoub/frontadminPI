@@ -1,0 +1,41 @@
+<div class="bg-img">
+  <div class="container "  >
+    <div class="row">
+      <div class="col-4"></div>
+        <div class="col-4 " style=" background: linear-gradient(#c3c4c500, #ffffff00)">
+          <img src="../../assets/img/logo2.png" class="navbar-brand-img" alt="...">
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row">
+  <div class="login-box">
+
+    <h2>Reset password </h2>
+
+    <form role="form" [formGroup]="resetForm" (ngSubmit)="reset()">
+
+
+
+
+
+          <div class="user-box">
+              <input type="text" formControlName="email" [ngClass]="{'input-f':(email.touched ||email.dirty)  && email.errors,
+              'input-true':email.touched && email.valid }">
+              <label>E-mail</label>
+              <span class="sp" *ngIf="showsp">An email has been sent to the address you provided with instructions for resetting your password. Please check your email and follow the instructions provided.</span>
+
+          </div>
+      <button   type="submit" [disabled]="resetForm.invalid || show" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin">  </i> Reset</button><div class="spinner" [ngClass]="{'show': isLoading}"></div>
+      <!--
+      <a  type="submit"  (click)="getData()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Se connecter
+      </a>-->
+    </form>
+  </div>
+  </div>
+  </div>
+  </div>

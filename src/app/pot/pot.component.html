@@ -5,250 +5,62 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title"> Pots Table</h4>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
+          <div class="table">
             <table class="table">
               <thead class=" text-primary">
                 <th>
-                  Name
+                  Title
                 </th>
                 <th>
-                  Country
+                  Detail
                 </th>
                 <th>
-                  City
+                  Goal Amount
+                </th>
+                <th>
+                  Current Amount
+                </th>
+                <th>
+                  Created Date
+                </th>
+                <th>
+                  Expire Date
+                </th>
+                <th>
+                  Owner
+                </th>
+                <th>
+                  Reference
+                </th>
+                <th>
+                  Status
                 </th>
                 <th class="text-right">
-                  Salary
+                  Action
                 </th>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
+                <tr *ngFor="let pot of pots">
+                  <td>{{ pot.title }}</td>
+                  <td>{{ pot.detail }}</td>
+                  <td>{{ pot.goalAmount }}</td>
+                  <td>{{ pot.currentAmount }}</td>
+                  <td>{{ pot.createDate | date:'dd-MM-yyyy' }}</td>
+                  <td>{{ pot.expireDate | date:'dd-MM-yyyy'}}</td>
+                  <td>{{ pot.user.name }} {{ pot.user.lastname}}</td>
+                  <td>{{ pot.reference }}</td>
+                  <td *ngIf="pot.etat == 'actif' ; else inactif"> <span class="badge bg-success">Actif</span></td>
+                  <ng-template #inactif>
+                    <td>
+                      <span class="badge bg-danger">Expired</span>
+                    </td>
+                  </ng-template>
                   <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-plain">
-        <div class="card-header">
-          <h4 class="card-title"> Table on Plain Background</h4>
-          <p class="category"> Here is a subtitle for this table</p>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-right">
-                  Salary
-                </th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
+                    <button type="button" class="btn btn-neutral btn-sm" (click)="openModal(pot) ">Update</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(pot.idPot)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -258,4 +70,87 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-11">
+    </div>
+    <div class="col-md-1">
+      <button (click)="myModal.show() " type="button" class="btn btn-default btn-just-icon"> <i class="now-ui-icons ui-1_simple-add"></i></button>
+    </div>
+  </div>
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">Add a pot</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form "  [formGroup]="addform" (ngSubmit)="addpot()">
+            <label >Title</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="text" formControlName="title">
+            <label >Detail</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="text" formControlName="detail">
+            <label >Goal Amount</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="number" formControlName="goalAmount">
+            <label >Expire Date</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="Date" formControlName="expireDate" [min]="today">
+
+            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <!--modal.close('Ok click')-->
+            <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div>
+<!-- /.modal-dialog -->
+
+</div>
+<div bsModal #myupdateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">update pot</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myupdateModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form "  [formGroup]="updateform" (ngSubmit)="updatepot(currentpot)">
+            <label >Title</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="text" formControlName="title">
+            <label >Detail</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="text" formControlName="detail">
+            <label >Goal Amount</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="number" formControlName="goalAmount">
+            <label >Expire Date</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="Date" formControlName="expireDate" [min]="today">
+
+            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <!--modal.close('Ok click')-->
+            <button type="button" class="btn btn-light" (click)="myupdateModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div>
+<!-- /.modal-dialog -->
+
+</div>
 </div>
