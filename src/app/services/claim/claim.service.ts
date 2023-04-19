@@ -6,21 +6,34 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ClaimService {
   baseUrl="http://127.0.0.1:8085"
   constructor(private http:HttpClient) { }
-  getclaim()
+  getclaim(token)
   {
-    return this.http.get<any>(this.baseUrl+"/claim/retrieve-all-claims",{
-      headers:new HttpHeaders().append('Content-type','appplication/json')
+    return this.http.get<any>(this.baseUrl+"/claim/retrieve-all-claims", {
+      headers:new HttpHeaders({ authorization : 'Bearer '+token })
     })
   }
-  updateClaim(data)
+  updateClaim(data,token)
   {
-    return this.http.put<any>(this.baseUrl+"/claim/update-claim",JSON.stringify(data),{
+      return this.http.put<any>(this.baseUrl+"/claim/update-claim",JSON.stringify(data),{
+        headers:new HttpHeaders({
+          'authorization' : 'Bearer '+token ,
+          'Content-Type': 'application/json',
+        }
 
-      headers:new HttpHeaders().append('Content-type','application/json; charset=utf-8')
+        )
+      })
+    }
+  sendmail(email,message,token){
+
+    return this.http.post<any>(this.baseUrl+"/claim/sendmail/"+email,message, {
+      headers:new HttpHeaders({
+        'authorization' : 'Bearer '+token ,
+        'Content-Type': 'application/json',
+      }
+
+      )
     })
-  }
-  sendmail(email,message){
 
-    return this.http.post<any>(this.baseUrl+"/claim/sendmail/"+email,message)
+
   }
 }

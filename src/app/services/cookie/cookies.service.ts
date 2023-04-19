@@ -19,8 +19,8 @@ public setCookieId(value: string): void {
 public getCookieJWT(): string {
   return this.ngxCookieService.get("jwt");
 }
-public getCookieIDUser(): string {
-  return this.ngxCookieService.get("idUser");
+public getCookieIDUser(): number {
+  return Number(this.ngxCookieService.get("idUser"));
 }
 
 public setCookieCostom(name:string , value: string): void {

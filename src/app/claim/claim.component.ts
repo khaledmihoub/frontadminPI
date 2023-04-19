@@ -4,6 +4,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { CookiesService } from '../services/cookie/cookies.service';
 
 @Component({
   selector: 'app-claim',
@@ -13,17 +14,20 @@ import 'jspdf-autotable';
 export class ClaimComponent implements OnInit {
   editMode: boolean = false;
   searchTerm: string = '';
-
+  jwt:String;
   claims:any[];
   newStatus: string = 'Pending';
 
   @ViewChild('myModal') myModal: ModalDirective;
   @ViewChild('mychatModal') mychatModal: ModalDirective;
   currentClaim: any;
-  constructor(private claimService:ClaimService) { }
+  constructor(private claimService:ClaimService, private cs:CookiesService) {
+    this.jwt=this.cs.getCookieJWT().toString();
+   }
+
 
   ngOnInit(): void {
-    this.claimService.getclaim().subscribe(data=>{
+    this.claimService.getclaim(this.jwt).subscribe(data=>{
       this.claims=data.reverse();
      console.log(data);
      console.log(this.currentClaim);
@@ -37,7 +41,7 @@ export class ClaimComponent implements OnInit {
   onStatusSave(event, claim) {
   event.preventDefault();
   claim.status = claim.newStatus;
-  this.claimService.updateClaim(claim).subscribe(updatedClaim => {
+  this.claimService.updateClaim(claim,this.jwt).subscribe(updatedClaim => {
     this.editMode = false;
   });
 }
@@ -58,7 +62,7 @@ export class ClaimComponent implements OnInit {
     })
   }
   send(){
-    this.claimService.sendmail(this.sendmail.get('email').value,this.sendmail.get('message').value).subscribe(data=>{
+    this.claimService.sendmail(this.sendmail.get('email').value,this.sendmail.get('message').value, this.jwt).subscribe(data=>{
      console.log(data);
    })
   }
