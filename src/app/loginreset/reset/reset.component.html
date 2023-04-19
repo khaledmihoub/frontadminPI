@@ -23,6 +23,7 @@
               'input-true':email.touched && email.valid }">
               <label>E-mail</label>
               <span class="sp" *ngIf="showsp">An email has been sent to the address you provided with instructions for resetting your password. Please check your email and follow the instructions provided.</span>
+              <span class="sp2" *ngIf="showsp2">Sorry this mail doesn't match any account, please verify your emaill.</span>
 
           </div>
       <button   type="submit" [disabled]="resetForm.invalid || show" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin">  </i> Reset</button><div class="spinner" [ngClass]="{'show': isLoading}"></div>

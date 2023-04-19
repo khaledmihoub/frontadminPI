@@ -11,15 +11,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ResetpasswordComponent implements OnInit {
   passwordchange: FormGroup;
+  showsp = false;
+
   changeInput() {
-    this.type_input = !this.type_input;
+
   }
   changeInput2() {
     this.type_input2 = !this.type_input2;
+    this.type_input = !this.type_input;
   }
   type_input: any;
   type_input2: any;
-  constructor(private formBuilder: FormBuilder,private LS: LoginService,private activatedRoute: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder,private LS: LoginService,private activatedRoute: ActivatedRoute,private router: Router) { }
   token: any;
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -28,8 +31,8 @@ export class ResetpasswordComponent implements OnInit {
     });
 
     this.passwordchange = this.formBuilder.group({
-      password: ['', Validators.required],
-      passwordConfirmer: ['', Validators.required],
+      password: ['', [Validators.required,Validators.minLength(8)]],
+      passwordConfirmer: ['', [Validators.required,Validators.minLength(8)]],
     }, {
       validator: MustMatch('password', 'passwordConfirmer')
     });
@@ -51,6 +54,10 @@ export class ResetpasswordComponent implements OnInit {
     console.log(this.passwordchange.value.password);
     this.LS.postmotdepasse(this.token,this.passwordchange.value.password).subscribe(res=>{
         if (res==true){
+          this.showsp=true;
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 4000);
           console.log("true");
           //gestion
         }else {
