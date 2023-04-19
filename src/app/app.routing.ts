@@ -27,6 +27,11 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'dashboard'
+  },
+  {
+    path: 'product',
+    redirectTo: 'product',
+    pathMatch: 'full',
   }
 ];
 
