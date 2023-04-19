@@ -8,11 +8,18 @@ import { ToastrModule } from 'ngx-toastr';
 import {ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
 import { AppComponent } from './app.component';
-
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { MatDialogModule, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MatInputModule} from "@angular/material/input";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from "@angular/material/button";
+import { ToastComponent } from './toast/toast.component';
+
+
 
 import {MatNativeDateModule} from '@angular/material/core';
 import jwt_decode from "jwt-decode";
@@ -23,10 +30,9 @@ import { ResetpasswordComponent } from './loginreset/resetpassword/resetpassword
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
+
 @NgModule({
   imports: [
-
-    MatNativeDateModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -37,14 +43,22 @@ export function tokenGetter() {
     NgbModule,
     ToastrModule.forRoot(),
 
+    MatDialogModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatButtonModule
 
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    ProductDetailsComponent,
+    ToastComponent,
     ResetComponent,
     ResetpasswordComponent,
+
 
 
 
