@@ -11,6 +11,7 @@ import {LoginService}  from '../../services/login/login.service';
 export class ResetComponent implements OnInit {
   show = false;
   showsp = false;
+  showsp2 = false;
   isLoading: boolean = false;
   resetForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email])
@@ -19,7 +20,7 @@ export class ResetComponent implements OnInit {
     return this.resetForm.get('email');
   }
 
-  constructor(private LS: LoginService,) { }
+  constructor(private LS: LoginService,private activatedRoute: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
 
@@ -32,18 +33,25 @@ export class ResetComponent implements OnInit {
       this.isLoading = false;
     }, 10000);
     this.LS.resetemail(this.email.value).subscribe(res=>{
-      this.showsp = true;
       this.isLoading = false;
       //
 
         if (res==true){
           console.log("true");
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+          this.showsp = true;
+
           //gestion
         }else {
           console.log("false");
+          this.showsp2 =true ;
           //gestion
         }
 
+    },error=>{
+      this.showsp2 =true ;
     })
   }
 }
