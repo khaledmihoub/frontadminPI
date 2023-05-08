@@ -37,8 +37,8 @@
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let claim of claims" >
-                  <td [ngStyle]="{ color: claim.status === 'Pending' ? 'red' : 'inherit'  }"  [style.font-weight]="claim.status === 'Pending' ? 'bold' : 'normal'">
+                <tr *ngFor="let claim of filteredClaims()"  >
+                  <td>
                    {{claim.reference}}
                   </td>
                   <td>
@@ -55,7 +55,9 @@
                     <ng-container *ngIf="claim.reference.startsWith('EVENT')">Event</ng-container>
                   </td>
                   <td>
-                    <span *ngIf="!editMode">{{ claim.status }}</span>
+                    <span *ngIf="!editMode && claim.status=='Pending'" > <span class="badge bg-danger b">Pending</span></span>
+                    <span *ngIf="!editMode && claim.status=='In progress'" > <span class="badge bg-warning b">In progress</span></span>
+                    <span *ngIf="!editMode && claim.status=='Completed'" > <span class="badge bg-success b">Completed</span></span>
                     <div *ngIf="editMode">
                         <div class="form-group">
                           <select class="form-control" [(ngModel)]="claim.newStatus" >
@@ -78,7 +80,7 @@
                   <td class="text-right">
                     <button type="button" class="btn btn-neutral btn-sm pt "  (click)="editMode = true"><i class="now-ui-icons loader_gear"></i></button>
                     <button type="button" class="btn btn-neutral btn-sm pt " (click)="openModal(claim) "><i class="now-ui-icons arrows-1_share-66"></i></button>
-                    <button type="button" class="btn btn-neutral btn-sm pt " (click)="openchatModal(claim) "><i class="now-ui-icons business_bulb-63"></i></button>
+                    <button type="button" class="btn btn-neutral btn-sm pt " [disabled]="claim.status=='Completed'" (click)="openchatModal(claim) "><i class="now-ui-icons business_bulb-63"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -88,7 +90,13 @@
       </div>
     </div>
   </div>
-
+  <div class="alert alert-success custom-success" *ngIf="variable">
+    <button type="button" aria-hidden="true" class="close">
+      <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+    <span>
+      <b> Success - </b> Claim {{ref}} completed</span>
+  </div>
 
   <div bsModal #myModal="bs-modal" id="model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
   aria-hidden="true">
@@ -130,25 +138,23 @@
    <div class="modal-dialog modal-bottom-right" role="document">
     <div class="modal-content m">
       <form [formGroup]="sendmail" (ngSubmit)="send()">
-        <div class="modal-header bg-primary text-white">
+        <div class="modal-header1 text-white">
           <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-          <button type="button" class="close" aria-describedby="modal-title" (click)="mychatModal.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body m">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name" formControlName="email" readonly>
+            <label for="recipient-name" class="col-form-label">To :</label>
+            <div class="input-group" >
+              <input type="text" class="form-control" id="recipient-name" formControlName="email" readonly>
+            </div>
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label txt">Message:</label>
-            <textarea class="form-control" placeholder="Type here.." id="message-text" formControlName="message" style="resize: vertical; height: 250px;"></textarea>
+            <textarea class="form-control wide-textarea" placeholder="Type here.." id="message-text" formControlName="message" rows="10"></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="mychatModal.hide()">Close</button>
-          <button type="submit" class="btn btn-primary">Send message</button>
+          <button type="submit" class="btn btn-primary m">Send message</button>
         </div>
       </form>
     </div>
@@ -156,7 +162,6 @@
   </div>
 
   </div>
-
 
 </div>
 
