@@ -19,8 +19,6 @@ export class PotService {
 
   addpot(data, token)
   {
-
-
     return this.http.post<any>(this.baseUrl+"/pot/add-pot",JSON.stringify(data),
           {
             headers:new HttpHeaders({

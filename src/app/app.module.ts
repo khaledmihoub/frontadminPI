@@ -21,11 +21,17 @@ import { ToastComponent } from './toast/toast.component';
 
 
 
+
 import {MatNativeDateModule} from '@angular/material/core';
 import jwt_decode from "jwt-decode";
 import { CookieService } from 'ngx-cookie-service';
 import { ResetComponent } from './loginreset/reset/reset.component';
 import { ResetpasswordComponent } from './loginreset/resetpassword/resetpassword.component';
+import { CategoryComponent } from './category/category.component';
+import {ModalModule} from "ngx-bootstrap/modal";
+import {MatIconModule} from "@angular/material/icon";
+import { StatisticsComponent } from './statistics/statistics.component';
+import {ChartsModule} from "ng2-charts";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -42,12 +48,14 @@ export function tokenGetter() {
     ReactiveFormsModule,
     NgbModule,
     ToastrModule.forRoot(),
-
     MatDialogModule,
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    ModalModule,
+    MatIconModule,
+    ChartsModule
 
   ],
   declarations: [
@@ -58,7 +66,8 @@ export function tokenGetter() {
     ToastComponent,
     ResetComponent,
     ResetpasswordComponent,
-
+    CategoryComponent,
+    StatisticsComponent,
 
 
 
