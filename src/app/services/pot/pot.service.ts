@@ -19,11 +19,13 @@ export class PotService {
 
   addpot(data, token)
   {
-    return this.http.post<any>(this.baseUrl+"/pot/add-pot",JSON.stringify(data),
+
+
+    return this.http.post<any>(this.baseUrl+"/pot/add/image",data,
           {
             headers:new HttpHeaders({
-              'authorization' : 'Bearer '+token ,
-              'Content-Type': 'application/json',
+              'authorization' : 'Bearer '+token
+
             }
 
             )

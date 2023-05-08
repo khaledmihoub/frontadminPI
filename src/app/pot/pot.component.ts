@@ -12,9 +12,8 @@ import { CookiesService } from '../services/cookie/cookies.service';
 export class PotComponent implements OnInit {
   @ViewChild('myupdateModal') myupdateModal: ModalDirective;
 
-
+  searchTerm: string = '';
   constructor(private potService: PotService, private cs:CookiesService ) {
-        //get token in constructeur and pass it to APIs
     this.jwt=this.cs.getCookieJWT().toString();
     this.id=this.cs.getCookieIDUser();
      //console.log(this.jwt);
@@ -26,19 +25,20 @@ export class PotComponent implements OnInit {
   today: string;
   currentpot:any;
   id:number;
+  selectedfile:any;
 
   addform = new FormGroup({
-    title: new FormControl('', []),
-    detail: new FormControl('', []),
-    goalAmount: new FormControl('', []),
-    expireDate: new FormControl('', []),
+    title: new FormControl('', [Validators.required,Validators.minLength(4)]),
+    detail: new FormControl('', [Validators.required,Validators.minLength(4)]),
+    goalAmount: new FormControl('', [Validators.required]),
+    expireDate: new FormControl('', [Validators.required]),
 
 })
 updateform = new FormGroup({
-  title: new FormControl('', []),
-  detail: new FormControl('', []),
-  goalAmount: new FormControl('', []),
-  expireDate: new FormControl('', []),
+  title: new FormControl('', [Validators.required,Validators.minLength(4)]),
+  detail: new FormControl('', [Validators.required,Validators.minLength(4)]),
+  goalAmount: new FormControl('', [Validators.required]),
+  expireDate: new FormControl('', [Validators.required]),
 
 })
 
@@ -80,8 +80,10 @@ openModal(pot: any) {
       let data=(this.addform.value);
       data.user = { idUser: this.id };
       console.log(data);
-
-      this.potService.addpot(data,this.jwt).subscribe(res=>{
+      const formData: FormData = new FormData();
+      formData.append('image', this.selectedfile, this.selectedfile.name);
+      formData.append('pot', JSON.stringify(data));
+      this.potService.addpot(formData,this.jwt).subscribe(res=>{
           console.log(res);
           window.location.reload();
 
@@ -96,6 +98,17 @@ openModal(pot: any) {
 
   })
   }
-
+  filteredPot():any[] {
+    if (!this.searchTerm) {
+      return this.pots;
+    }
+    return this.pots.filter((pot) =>
+      pot.etat.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      pot.reference.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  onFileSelected(event) {
+    this.selectedfile=  event.target.files[0];
+  }
 
 }
