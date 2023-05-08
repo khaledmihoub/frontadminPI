@@ -8,6 +8,11 @@
           <h4 class="card-title"> Pots Table</h4>
         </div>
         <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <input type="text" placeholder="Search..." class="form-control" [(ngModel)]="searchTerm" />
+            </div>
+          </div>
           <div class="table">
             <table class="table">
               <thead class=" text-primary">
@@ -43,7 +48,7 @@
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let pot of pots">
+                <tr *ngFor="let pot of filteredPot()">
                   <td>{{ pot.title }}</td>
                   <td>{{ pot.detail }}</td>
                   <td>{{ pot.goalAmount }}</td>
@@ -101,8 +106,10 @@ aria-hidden="true">
             <label >Expire Date</label>
             <label style="color:red"></label>
             <input class="form-control" placeholder="" type="Date" formControlName="expireDate" [min]="today">
+            <label for="image">Upload File</label>
+            <input type="file" class="form-control-file" id="image" name="image" (change)="onFileSelected($event)">
 
-            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
+            <button   type="submit" [disabled]="addform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
           </form>
         </div>
         <div class="modal-footer">
@@ -140,7 +147,7 @@ aria-hidden="true">
             <label style="color:red"></label>
             <input class="form-control" placeholder="" type="Date" formControlName="expireDate" [min]="today">
 
-            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
+            <button   type="submit" [disabled]="updateform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
           </form>
         </div>
         <div class="modal-footer">
