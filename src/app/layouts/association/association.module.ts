@@ -1,8 +1,13 @@
+
+
+
+
+
+
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
@@ -32,6 +37,7 @@ import { ClaimComponent } from '../../claim/claim.component';
 
 // we need to import the menu trigger
 import { MatMenuModule } from '@angular/material/menu';
+import { AssociationRoutingModule } from './association-routing.module';
 
 
 
@@ -41,7 +47,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
     MatMenuModule,
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+    RouterModule.forChild(AssociationRoutingModule),
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
@@ -55,7 +61,8 @@ import { MatMenuModule } from '@angular/material/menu';
   declarations: [
 
 
+
   ]
 })
 
-export class AdminLayoutModule {}
+export class AssociationModule {}

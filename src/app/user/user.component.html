@@ -8,6 +8,11 @@
           <h4 class="card-title"> Users Table</h4>
         </div>
         <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <input type="text" placeholder="Search..." class="form-control" [(ngModel)]="searchTerm" />
+            </div>
+          </div>
           <div class="table">
             <table class="table">
               <thead class=" text-primary">
@@ -40,14 +45,17 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of filteredUser()">
                   <td>{{ user.userRole.role }}</td>
                   <td>{{ user.name }}</td>
                   <td>{{ user.lastname }}</td>
                   <td>{{ user.login }}</td>
                   <td>{{ user.email }}</td>
                   <td>{{ user.createDateTime | date:'dd-MM-yyyy' }}</td>
-                  <td >{{user.status}}</td>
+
+                  <td *ngIf="user.status == 1 ; "> <span class="badge bg-success">Actif</span></td>
+                  <td *ngIf="user.status == 0 ; "> <span class="badge bg-danger">Deleted</span></td>
+                  <td *ngIf="user.status == 3 ; "> <span class="badge bg-warning">Temporal</span></td>
 
 
                   <td class="text-right">
@@ -70,6 +78,13 @@
       <button (click)="myModal.show() " type="button" class="btn btn-default btn-just-icon"> <i class="now-ui-icons ui-1_simple-add"></i></button>
     </div>
   </div>
+  <div class="alert alert-danger custom-success" *ngIf="err">
+    <button type="button" aria-hidden="true" class="close">
+      <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+    <span>
+      <b> Error - </b> This login or email is already existed</span>
+  </div>
         <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-success" role="document">
@@ -82,20 +97,28 @@
                 </div>
                 <div class="modal-body">
                   <form role="form "  [formGroup]="addform" (ngSubmit)="adduser()">
-                    <label >Title</label>
+                    <label >Name</label>
                     <label style="color:red"></label>
-                    <input class="form-control" placeholder="" type="text" formControlName="title">
-                    <label >Detail</label>
+                    <input class="form-control" placeholder="" type="text" formControlName="name">
+                    <label >Lastname</label>
                     <label style="color:red"></label>
-                    <input class="form-control" placeholder="" type="text" formControlName="detail">
-                    <label >Goal Amount</label>
+                    <input class="form-control" placeholder="" type="text" formControlName="lastname">
+                    <label >Email</label>
                     <label style="color:red"></label>
-                    <input class="form-control" placeholder="" type="number" formControlName="goalAmount">
-                    <label >Expire Date</label>
+                    <input class="form-control" placeholder="" type="text" formControlName="email">
+                    <label >Login</label>
                     <label style="color:red"></label>
-                    <input class="form-control" placeholder="" type="Date" formControlName="expireDate" >
+                    <input class="form-control" placeholder="" type="text" formControlName="login" >
 
-                    <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
+                    <label >Role :</label>
+                    <label style="color:red"></label>
+                    <select formControlName="userRole">
+                      <option [ngValue]="null" disabled>Choose Role</option>
+                      <option *ngFor="let r of roles" [ngValue]="r.idRole">
+                       {{ r.role }}
+                      </option>
+                    </select>
+                    <button   type="submit" [disabled]="addform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -108,37 +131,45 @@
         <!-- /.modal-dialog -->
 
         </div>
-        <!--
-<div bsModal #myupdateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel" aria-hidden="true">
+
+<div bsModal #updateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel" aria-hidden="true">
     <div class="modal-dialog modal-success" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title c4" id="modal-title">update user</h4>
-                <button type="button" class="close" aria-describedby="modal-title" (click)="myupdateModal.hide()">
+                <button type="button" class="close" aria-describedby="modal-title" (click)="updateModal.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
               <form role="form "  [formGroup]="updateform" (ngSubmit)="updateuser(currentuser)">
-                <label >Title</label>
+                <label >Name</label>
                 <label style="color:red"></label>
-                <input class="form-control" placeholder="" type="text" formControlName="title">
-                <label >Detail</label>
+                <input class="form-control" placeholder="" type="text" formControlName="name">
+                <label >Lastname</label>
                 <label style="color:red"></label>
-                <input class="form-control" placeholder="" type="text" formControlName="detail">
-                <label >Goal Amount</label>
+                <input class="form-control" placeholder="" type="text" formControlName="lastname">
+                <label >Email</label>
                 <label style="color:red"></label>
-                <input class="form-control" placeholder="" type="number" formControlName="goalAmount">
-                <label >Expire Date</label>
+                <input class="form-control" placeholder="" type="text" formControlName="email">
+                <label >Login</label>
                 <label style="color:red"></label>
-                <input class="form-control" placeholder="" type="Date" formControlName="expireDate" [min]="today">
-
-                <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
+                <input class="form-control" placeholder="" type="text" formControlName="login">
+                <label >Password</label>
+                <label style="color:red"></label>
+                <input class="form-control" placeholder="" type="password" formControlName="password">
+                <select formControlName="userRole">
+                  <option [ngValue]="null" disabled>Choose Role</option>
+                  <option *ngFor="let r of roles" [ngValue]="r.idRole">
+                   {{ r.role }}
+                  </option>
+                </select>
+                <button   type="submit" [disabled]="updateform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
               </form>
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-light" (click)="myupdateModal.hide()">Cancel</button>
+                <button type="button" class="btn btn-light" (click)="updateModal.hide()">Cancel</button>
             </div>
         </div>
 
@@ -146,5 +177,5 @@
 
 
 </div>
--->
+
 </div>
