@@ -49,6 +49,10 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ChartsModule } from 'ng2-charts';
 import { CommonModule } from '@angular/common';
+import { CategoryComponent } from './category/category.component';
+
+import {MatIconModule} from "@angular/material/icon";
+import { StatisticsComponent } from './statistics/statistics.component';
 //npm install @angular/service-worker@13.2.6 --force
 //ng add @angular/pwa@13.2.6
 export function tokenGetter() {
@@ -57,6 +61,26 @@ export function tokenGetter() {
 
 @NgModule({
   imports: [
+
+
+    
+  
+   
+    
+  
+    
+   
+   
+    
+    
+
+   
+    
+    MatIconModule,
+
+
+
+
     BrowserAnimationsModule,
 
     HttpClientModule,
@@ -112,6 +136,8 @@ export function tokenGetter() {
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    CategoryComponent,
+    StatisticsComponent,
 
 
   ],

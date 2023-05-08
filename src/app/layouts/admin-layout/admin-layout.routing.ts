@@ -18,6 +18,7 @@ import { EventComponent } from '../../event/event.component';
 import { OrderComponent } from '../../order/order.component';
 import { PotComponent } from '../../pot/pot.component';
 import { ClaimComponent } from '../../claim/claim.component';
+import {CategoryComponent} from "../../category/category.component";
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
@@ -37,5 +38,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'order',        component: OrderComponent },
     { path: 'pot',        component: PotComponent },
     { path: 'claim',        component: ClaimComponent },
+    { path: 'category',        component: CategoryComponent },
 
 ];

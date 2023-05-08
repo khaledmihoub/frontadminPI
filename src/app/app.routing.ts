@@ -9,7 +9,11 @@ import { LoginComponent } from './login/login.component';
 import { ResetpasswordComponent } from './loginreset/resetpassword/resetpassword.component';
 import { AuthGuard } from './variables/auth.guard';
 import { ResetComponent } from './loginreset/reset/reset.component';
+
 import { AssAuthGuardService } from './variables/ass-auth-guard.service';
+
+import {CategoryComponent} from "./category/category.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -55,7 +59,8 @@ const routes: Routes = [
     path: 'product',
     redirectTo: 'product',
     pathMatch: 'full',
-  }
+  },
+
 ];
 
 @NgModule({

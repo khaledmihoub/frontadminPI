@@ -32,6 +32,9 @@ import { ClaimComponent } from '../../claim/claim.component';
 
 // we need to import the menu trigger
 import { MatMenuModule } from '@angular/material/menu';
+import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
 
 
 
@@ -49,6 +52,9 @@ import { MatMenuModule } from '@angular/material/menu';
     ToastrModule.forRoot(),
     MatSelectModule,
     ModalModule.forRoot(),
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
 
 
   ],
