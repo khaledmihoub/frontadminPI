@@ -46,7 +46,7 @@ export class ClaimComponent implements OnInit {
     this.editMode = false;
   });
 }
-  onCancel(claim) {
+  onCancel() {
     this.editMode = false;
   }
   openModal(claim: any) {

@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { ResetpasswordComponent } from './loginreset/resetpassword/resetpassword.component';
 
 import { ResetComponent } from './loginreset/reset/reset.component';
+import {CategoryComponent} from "./category/category.component";
 const routes: Routes = [
   {
     path: '',
@@ -41,7 +42,8 @@ const routes: Routes = [
     path: 'product',
     redirectTo: 'product',
     pathMatch: 'full',
-  }
+  },
+
 ];
 
 @NgModule({
