@@ -65,7 +65,10 @@ export class ResetpasswordComponent implements OnInit {
           //gestion
         }
 
-    })
+    }
+
+
+    )
   }
 
 

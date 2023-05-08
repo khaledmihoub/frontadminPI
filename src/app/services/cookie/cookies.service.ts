@@ -27,8 +27,8 @@ public setCookieCostom(name:string , value: string): void {
   this.ngxCookieService.set(name, value);
 }
 
-public getCookieCostom(name:string , value: string): void {
-  this.ngxCookieService.set(name, value);
+public getCookieCostom(name:string ): string {
+  return this.ngxCookieService.get(name);
 }
 
 deleteAllCookies(): void {

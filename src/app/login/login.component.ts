@@ -15,10 +15,7 @@ import {CookiesService}  from '../services/cookie/cookies.service';
 export class LoginComponent implements OnInit {
   constructor( private _router: Router ,private ls :LoginService, private ds:DossierService,private CS: CookiesService) { }
   ngOnInit(): void {
-    var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFsZWQxIiwicm9sZSI6InVzZXIiLCJpc3MiOiJzcHJpbmcgYnphY2siLCJpZCI6MiwiZXhwIjoxNjgxNTQ3ODY5LCJpYXQiOjE2ODE1MTkwNjl9.I7RX1IvOFQ96ZBDu-IgiJFd-oGRdRLzRtOBwb9En7hX0QiqumyASn1XD4wqBr3T8ZfKDo13-U1aA7ykuR4rSeQ";
-    var decoded = jwt_decode(token);
       this.CS.deleteAllCookies();
-    console.log(decoded);
   }
 
   loginForm = new FormGroup({
@@ -31,17 +28,18 @@ export class LoginComponent implements OnInit {
     //  let logindata=JSON.stringify(this.loginForm.value);
       this.ls.login(this.loginForm.value).subscribe(res=>{
           console.warn(res) ;
-
           this.CS.setCookieToken(res.jwt);
           var decoded = jwt_decode(res.jwt) as any ;
-
           this.CS.setCookieId(decoded.id);
+          this.CS.setCookieCostom("role",decoded.role);
+
           if (decoded.role == "admin"){
                 console.log(decoded.role);
                 this._router.navigate(['/dashboard']);
                 //redirection dashbord
           }else {
                console.log("not admin");
+               this._router.navigate(['/ass/user']);
                 //redirection interface user
           }
      },

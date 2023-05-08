@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "now-ui-dashboard-angular": {
+    "wecloud-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -19,7 +19,8 @@
             "allowedCommonJsDependencies": ["hammerjs", "chart.js"],
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -33,7 +34,9 @@
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js"
-            ]
+            ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -64,14 +67,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "now-ui-dashboard-angular:build"
+            "browserTarget": "wecloud-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "now-ui-dashboard-angular:build:production"
+              "browserTarget": "wecloud-app:build:production"
             },
             "development": {
-              "browserTarget": "now-ui-dashboard-angular:build:development"
+              "browserTarget": "wecloud-app:build:development"
             },
             "defaultConfiguration": "development"
           }
@@ -79,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "now-ui-dashboard-angular:build"
+            "browserTarget": "wecloud-app:build"
           }
         },
         "test": {
@@ -101,7 +104,8 @@
             ],
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/manifest.webmanifest"
             ]
           }
         },
@@ -117,7 +121,7 @@
         }
       }
     },
-    "now-ui-dashboard-angular-e2e": {
+    "wecloud-app-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -126,7 +130,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "now-ui-dashboard-angular:serve"
+            "devServerTarget": "wecloud-app:serve"
           }
         },
         "lint": {
@@ -141,7 +145,7 @@
       }
     }
   },
-  "defaultProject": "now-ui-dashboard-angular",
+  "defaultProject": "wecloud-app",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
