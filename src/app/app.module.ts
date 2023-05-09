@@ -15,6 +15,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './login/login.component';
 
 import {MatNativeDateModule} from '@angular/material/core';
+import { EvenementComponent } from './evenement/evenement.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+
 
 
 
@@ -31,12 +35,14 @@ import {MatNativeDateModule} from '@angular/material/core';
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    
 
 
 

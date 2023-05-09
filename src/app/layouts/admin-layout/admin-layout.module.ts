@@ -23,7 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { UserComponent } from '../../user/user.component';
 import { ProductComponent } from '../../product/product.component';
 import { PostComponent } from '../../post/post.component';
-import { EventComponent } from '../../event/event.component';
+
 import { OrderComponent } from '../../order/order.component';
 import { PotComponent } from '../../pot/pot.component';
 import { ClaimComponent } from '../../claim/claim.component';
@@ -32,6 +32,8 @@ import { ClaimComponent } from '../../claim/claim.component';
 
 // we need to import the menu trigger
 import { MatMenuModule } from '@angular/material/menu';
+import { EvenementComponent } from '../../evenement/evenement.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -49,6 +51,11 @@ import { MatMenuModule } from '@angular/material/menu';
     ToastrModule.forRoot(),
     MatSelectModule,
     ModalModule.forRoot(),
+    ReactiveFormsModule,
+    
+    
+    
+    
 
 
   ],
@@ -67,10 +74,11 @@ import { MatMenuModule } from '@angular/material/menu';
     UserComponent,
     ProductComponent,
     PostComponent,
-   EventComponent ,
+    EvenementComponent,
     OrderComponent ,
     PotComponent ,
     ClaimComponent
+
   ]
 })
 
