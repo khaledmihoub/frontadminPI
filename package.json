@@ -27,8 +27,10 @@
     "@angular/platform-browser": "^13.2.6",
     "@angular/platform-browser-dynamic": "^13.2.6",
     "@angular/router": "^13.2.6",
+
     "@angular/service-worker": "^13.2.6",
     "@ng-bootstrap/ng-bootstrap": "12.0.1",
+
     "@popperjs/core": "^2.11.4",
     "ajv": "7.0.1",
     "ajv-keywords": "4.0.0",
@@ -47,6 +49,7 @@
     "jwt-decode": "^3.1.2",
     "ng2-charts": "2.4.2",
     "ngx-bootstrap": "^8.0.0",
+
     "ngx-cookie-service": "^13.2.0",
     "ngx-toastr": "13.2.0",
     "nouislider": "14.6.3",
