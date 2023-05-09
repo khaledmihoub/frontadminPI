@@ -24,5 +24,11 @@ export class LoginService {
   postmotdepasse(token,motdepasse) {
     return this.http.post(this.baseUrl+"/change_password/"+token, motdepasse );
   }
-
+  getoneuser(token:any,id:any)
+  {
+    return this.http.get<any>(this.baseUrl+"/user/get-user/"+id,
+        {
+          headers:new HttpHeaders({ authorization : 'Bearer '+token })
+        })
+  }
 }

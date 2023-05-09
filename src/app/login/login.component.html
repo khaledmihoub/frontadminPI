@@ -46,6 +46,8 @@
             'input-true':password.touched && password.valid }">
             <label>Password</label>
             <span class="sp" *ngIf="loginForm.invalid">Password must be less than 8 characters</span>
+            <span class="sp" *ngIf="err">{{message}}</span>
+
         </div>
     <button   type="submit" [disabled]="loginForm.invalid" class="btn btn-primary mt-4"> <i class="now-ui-icons business_badge">  </i>   Login </button>
             <!--
