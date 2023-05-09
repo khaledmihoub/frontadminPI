@@ -32,8 +32,13 @@ import { ClaimComponent } from '../../claim/claim.component';
 
 // we need to import the menu trigger
 import { MatMenuModule } from '@angular/material/menu';
-import { EvenementComponent } from '../../evenement/evenement.component';
+
+  import { EvenementComponent } from '../../evenement/evenement.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+
 
 
 
@@ -51,23 +56,16 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ToastrModule.forRoot(),
     MatSelectModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule,
-    
-    
-    
-    
+
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+
 
 
   ],
   declarations: [
-    DashboardComponent,
-    UserProfileComponent,
-    TableListComponent,
-    UpgradeComponent,
-    TypographyComponent,
-    IconsComponent,
-    MapsComponent,
-    NotificationsComponent,
+
 
     DossierComponent,
     FichierComponent,
@@ -78,6 +76,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     OrderComponent ,
     PotComponent ,
     ClaimComponent
+
 
   ]
 })

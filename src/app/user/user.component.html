@@ -5,257 +5,177 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title"> Users Table</h4>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-right">
-                  Salary
-                </th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <input type="text" placeholder="Search..." class="form-control" [(ngModel)]="searchTerm" />
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-plain">
-        <div class="card-header">
-          <h4 class="card-title"> Table on Plain Background</h4>
-          <p class="category"> Here is a subtitle for this table</p>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
+          <div class="table">
             <table class="table">
               <thead class=" text-primary">
+                <th>
+                  Role
+                </th>
                 <th>
                   Name
                 </th>
                 <th>
-                  Country
+                Last name
+                </th>
+
+                <th>
+                  Login
                 </th>
                 <th>
-                  City
+                  Email
                 </th>
+                <th>
+                  Created Date
+                </th>
+                <th>
+                  Status
+                </th>
+
                 <th class="text-right">
-                  Salary
+                  Action
                 </th>
               </thead>
+
               <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
+                <tr *ngFor="let user of filteredUser()">
+                  <td>{{ user.userRole.role }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.lastname }}</td>
+                  <td>{{ user.login }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.createDateTime | date:'dd-MM-yyyy' }}</td>
+
+                  <td *ngIf="user.status == 1 ; "> <span class="badge bg-success">Actif</span></td>
+                  <td *ngIf="user.status == 0 ; "> <span class="badge bg-danger">Deleted</span></td>
+                  <td *ngIf="user.status == 3 ; "> <span class="badge bg-warning">Temporal</span></td>
+
+
                   <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
+                    <button type="button" class="btn btn-neutral btn-sm" (click)="openModal(user) ">Update</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(user.idUser)">Delete</button>
                   </td>
                 </tr>
               </tbody>
+
             </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-11">
+    </div>
+    <div class="col-md-1">
+      <button (click)="myModal.show() " type="button" class="btn btn-default btn-just-icon"> <i class="now-ui-icons ui-1_simple-add"></i></button>
+    </div>
+  </div>
+  <div class="alert alert-danger custom-success" *ngIf="err">
+    <button type="button" aria-hidden="true" class="close">
+      <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+    <span>
+      <b> Error - </b> This login or email is already existed</span>
+  </div>
+        <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-success" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title c4" id="modal-title">Add a user</h4>
+                    <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form role="form "  [formGroup]="addform" (ngSubmit)="adduser()">
+                    <label >Name</label>
+                    <label style="color:red"></label>
+                    <input class="form-control" placeholder="" type="text" formControlName="name">
+                    <label >Lastname</label>
+                    <label style="color:red"></label>
+                    <input class="form-control" placeholder="" type="text" formControlName="lastname">
+                    <label >Email</label>
+                    <label style="color:red"></label>
+                    <input class="form-control" placeholder="" type="text" formControlName="email">
+                    <label >Login</label>
+                    <label style="color:red"></label>
+                    <input class="form-control" placeholder="" type="text" formControlName="login" >
+
+                    <label >Role :</label>
+                    <label style="color:red"></label>
+                    <select formControlName="userRole">
+                      <option [ngValue]="null" disabled>Choose Role</option>
+                      <option *ngFor="let r of roles" [ngValue]="r.idRole">
+                       {{ r.role }}
+                      </option>
+                    </select>
+                    <button   type="submit" [disabled]="addform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <!--modal.close('Ok click')-->
+                    <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.modal-dialog -->
+
+        </div>
+
+<div bsModal #updateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel" aria-hidden="true">
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title c4" id="modal-title">update user</h4>
+                <button type="button" class="close" aria-describedby="modal-title" (click)="updateModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form role="form "  [formGroup]="updateform" (ngSubmit)="updateuser(currentuser)">
+                <label >Name</label>
+                <label style="color:red"></label>
+                <input class="form-control" placeholder="" type="text" formControlName="name">
+                <label >Lastname</label>
+                <label style="color:red"></label>
+                <input class="form-control" placeholder="" type="text" formControlName="lastname">
+                <label >Email</label>
+                <label style="color:red"></label>
+                <input class="form-control" placeholder="" type="text" formControlName="email">
+                <label >Login</label>
+                <label style="color:red"></label>
+                <input class="form-control" placeholder="" type="text" formControlName="login">
+                <label >Password</label>
+                <label style="color:red"></label>
+                <input class="form-control" placeholder="" type="password" formControlName="password">
+                <select formControlName="userRole">
+                  <option [ngValue]="null" disabled>Choose Role</option>
+                  <option *ngFor="let r of roles" [ngValue]="r.idRole">
+                   {{ r.role }}
+                  </option>
+                </select>
+                <button   type="submit" [disabled]="updateform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
+              </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-light" (click)="updateModal.hide()">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
 </div>

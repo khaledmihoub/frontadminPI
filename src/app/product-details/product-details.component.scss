@@ -1,0 +1,59 @@
+.my-dialog-container {
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  width: 800px;
+  height: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, auto);
+  grid-gap: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-select {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .my-dialog-container {
+    width: 90%;
+    grid-template-columns: 1fr;
+  }
+}
+mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.picsum-img-wrapper {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.picsum-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+::ng-deep .visually-hidden{
+  visibility: hidden;
+}
+::ng-deep button.ng-star-inserted{
+  border: solid rgba(113, 113, 113, 0.47) 1px;
+  margin: 1px;
+}
+::ng-deep button.ng-star-inserted{
+  background-color: transparent;
+  border: none;
+}

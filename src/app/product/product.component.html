@@ -3,259 +3,232 @@
 <div class="main-content">
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
+      <div class="card" style="width: 1200px;">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title"> List of Products</h4>
         </div>
         <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <input type="text" placeholder="Search..." class="form-control" [(ngModel)]="searchTerm" (ngModelChange)="searchProducts()"/>
+            </div>
+          </div>
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-right">
-                  Salary
-                </th>
+              <th>
+                Title
+              </th>
+              <th>
+                Created At
+              </th>
+              <th>
+                Description
+              </th>
+              <th>
+                Quantity
+              </th>
+              <th>
+                Reference
+              </th>
+              <th>
+                Owner
+              </th>
+              <th>
+                Category
+              </th>
+              <th>
+                Status
+              </th>
+              <th>
+                Edit
+              </th>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
-                  </td>
-                </tr>
+              <tr *ngFor="let Product of products">
+                <td [ngStyle]="{ color: Product.status === true ? 'red' : 'inherit'  }"
+                    [style.font-weight]="Product.status === true ? 'bold' : 'normal'">
+                  {{ Product.title }}
+                </td>
+                <td>
+                  {{ Product.createDateTime}}
+                </td>
+                <td>
+                  {{ Product.description}}
+                </td>
+                <td>
+                  {{ Product.quantity}}
+                </td>
+                <td>
+                  {{ Product.reference}}
+                </td>
+                <td>
+                  {{Product.user.name}}
+                </td>
+                <td>
+                  {{Product.subcategory.name}}
+                </td>
+                <td>
+                  <select [(ngModel)]="Product.status" (ngModelChange)="saveProduct(Product)">
+                    <option [ngValue]=1 [selected]="Product.status === true ">ACTIVE</option>
+                    <option [ngValue]=0 [selected]="Product.status === false ">PENDING</option>
+                  </select>
+                </td>
+                <td>
+                  <i class="fas fa-pencil-alt" (click)="showProduct(Product)"> </i>
+                </td>
+              </tr>
               </tbody>
             </table>
+
+
+            <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+                 aria-labelledby="ModalaccLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-success" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title c4" id="modal-title2">Add a Product</h4>
+                    <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form #form="ngForm" role="form" (ngSubmit)="addProduct()">
+                      <label>Title</label>
+                      <label style="color:#20c997"></label>
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="productToAdd.title" name="title" #title="ngModel" required minlength="3" maxlength="20">
+                      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert-danger">
+                        <div *ngIf="title.errors?.['required']">Le titre est obligatoire</div>
+                        <div *ngIf="title.errors?.['minlength'] || title.errors?.['maxlength']">Le titre doit être  entre 3 et 20 caractere</div></div>
+                      <label>Reference</label>
+                      <label style="color:#20c997"></label>
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="productToAdd.reference" name="reference" #reference="ngModel" required minlength="3" maxlength="50">
+                      <div *ngIf="reference.invalid && (reference.dirty || reference.touched)" class="alert-danger">
+                        <div *ngIf="reference.errors?.['required']">La reference est obligatoire</div>
+                        <div *ngIf="reference.errors?.['minlength'] || reference.errors?.['maxlength']">La reference doit être  entre 3 et 50 carctere</div></div>
+                      <label>Quantity</label>
+                      <label style="color:#20c997"></label>
+                      <input class="form-control" placeholder="" type="number" [(ngModel)]="productToAdd.quantity" name="quantity" #quantity="ngModel" required min="1">
+                      <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="alert-danger">
+                        <div *ngIf="quantity.errors?.['required']">La quantite est obligatoire</div>
+                        <div *ngIf="quantity.errors?.['min']">La quantite doit être un nombre minimum de 1</div></div>
+                      <label>Description</label>
+                      <label style="color:#20c997"></label>
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="productToAdd.description" name="description" #description="ngModel" required minlength="20" maxlength="150">
+                      <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert-danger">
+                        <div *ngIf="description.errors?.['required']">La description est obligatoire</div>
+                        <div *ngIf="description.errors?.['minlength'] || description.errors?.['maxlength']">La description doit être  entre 20 et 150</div>
+                      </div>
+                      <label>Sub Category</label>
+                      <label style="color:#20c997"></label>
+                      <div style="display: flex">
+                        <select [(ngModel)]="currentCategory" (ngModelChange)="updateProduct()" class="form-control" [ngModelOptions]="{standalone: true}">>
+                          <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+                        </select>
+
+                        <select [(ngModel)]="productToAdd.subcategory" (ngModelChange)="updateProduct()" class="form-control" [ngModelOptions]="{standalone: true}" >
+                          <option *ngFor="let subcategory of filteredSubCategories" [ngValue]="subcategory" >{{ subcategory.name }}</option>
+                        </select>
+                      </div>
+                      <div class="input-group mb-3 mt-5">
+                        <input type="file" accept="image/*" multiple (change)="onFileSelected($event)"
+                               class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+                               aria-describedby="basic-addon2">
+                      </div>
+                      <button type="submit" class="btn btn-primary mt-4" [disabled]="form.invalid" >
+                        <i class="ni ni-badge iconmargin"></i> Add
+                      </button>
+                    </form>
+                  </div>
+
+                  <div class="modal-footer">
+                    <!--modal.close('Ok click')-->
+                    <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.modal-dialog -->
+
+            </div>
+
+
+            <div bsModal #DetailsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+                 aria-labelledby="ModalaccLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-success" role="document">
+                <div *ngIf="currentProduct" class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title c4" id="modal-title">Modify a Product</h5>
+                    <button type="button" class="close" aria-describedby="modal-title" (click)="DetailsModal.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <ngb-carousel *ngIf="currentProduct.ProductImages" [showNavigationIndicators]=false>
+                      <ng-template ngbSlide *ngFor="let Image of currentProduct.ProductImages">
+                        <div class="picsum-img-wrapper">
+                          <img [src]="Image.url" alt="Random first slide" style="height: 100%; width: 100%"/>
+                        </div>
+                      </ng-template>
+                    </ngb-carousel>
+                    <form role="form" (ngSubmit)="saveProduct(currentProduct)" #productForm="ngForm">
+                      <label>Title</label>
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="currentProduct.title"
+                             name="title" required>
+                      <label>Reference</label>
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="currentProduct.reference"
+                             name="reference" required>
+                      <label>Quantity</label>
+                      <input class="form-control" placeholder="" type="number" [(ngModel)]="currentProduct.quantity"
+                             name="quantity" required>
+                      <label>Description</label>
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="currentProduct.description"
+                             name="description" required>
+                      <label>Owner</label>
+                      <input class="form-control" placeholder="" type="text" [value]="currentProduct.user.name" readonly>
+                      <label>Sub Category</label>
+                      <div style="display: flex">
+                        <select [(ngModel)]="currentCategory" (ngModelChange)="updateProduct()" class="form-control" [compareWith]="compareCategories" required>
+                          <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+                        </select>
+                        <select [(ngModel)]="productToAdd.subcategory" (ngModelChange)="updateProduct()" class="form-control" [compareWith]="compareSubcategories" required>
+                          <option *ngFor="let subcategory of filteredSubCategories" [value]="subcategory">
+                            {{subcategory.name}}
+                          </option>
+                        </select>
+                      </div>
+                      <div>
+                        <button type="submit" class="btn btn-primary mt-4" [disabled]="productForm.invalid">
+                          <i class="ni ni-badge iconmargin"></i> Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="modal-footer">
+                    <!--modal.close('Ok click')-->
+                    <button type="button" class="btn btn-danger" (click)="DeleteProduct(currentProduct.idProduct)">DELETE</button>
+                    <button type="button" class="btn btn-light" (click)="DetailsModal.hide()">Cancel</button>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.modal-dialog -->
+
+            </div>
+
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-plain">
-        <div class="card-header">
-          <h4 class="card-title"> Table on Plain Background</h4>
-          <p class="category"> Here is a subtitle for this table</p>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-right">
-                  Salary
-                </th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div class="col-md-1">
+        <button (click)="myModal.show() " type="button" class="btn btn-default btn-just-icon"><i
+          class="now-ui-icons ui-1_simple-add"></i></button>
       </div>
     </div>
   </div>
 </div>
+
+
+

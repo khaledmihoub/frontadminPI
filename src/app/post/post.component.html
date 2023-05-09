@@ -5,128 +5,123 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title"> Post List</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
-              <thead class=" text-primary">
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-right">
-                  Salary
-                </th>
-              </thead>
-              <tbody>
+              <thead>
                 <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-right">
-                    $36,738
-                  </td>
+                    <th> Post</th>
+                    <th> Posted By </th>
+                    <th> Posted At </th>
+                   
+                    <th> Reactions </th>
+                    
+                    
+                    <th> Details </th>
+                    <th> Delete </th>
                 </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let post of posts" >
+                    <td> {{ post.description }} </td>
+                    <td> hedil </td>
+                    <td> {{ post.createDateTime  }} </td>
+                    <td> {{ post.nbReaction  }} </td>
+                   
+                    <td> <button (click)="PostDetails(post.idPost!)"  type="button" class="btn btn-default btn-just-icon"style="margin-left: 1px"> <i class="fas fa-info-circle"></i> </button> </td>
+                    <td>
+                      <button (click)="deletePost(post.idPost!)" type="button" class="btn btn-info" style="margin-left: 1px">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                    
                 </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-right">
-                    $38,735
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $98,615
-                  </td>
-                </tr>
-              </tbody>
+            </tbody>
             </table>
           </div>
         </div>
       </div>
+      
     </div>
+
+
+    <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">Comment Details</h4>
+            
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="comments">
+            <div *ngFor="let comment of comments"  >
+            <div *ngIf="comment.parent == null" class="comment">
+              <div   class="comment-header">
+                <img
+                src="https://source.unsplash.com/collection/happy-people"
+                class="rounded-circle me-2"
+                alt="avatar"
+                style="width: 38px; height: 38px; object-fit: cover"
+              />
+                <div class="comment-details">
+                  <div class="m-1 fw-bold">hedil</div>
+                  <div class="comment-date">{{ comment.date | date: 'MMM d, yyyy h:mm a' }}</div>
+                </div>
+              </div>
+              
+                <p class="m-0 fs-7 bg-gray p-2 rounded">{{ comment.text }}</p>
+              
+              
+                <button type="button" class="btn btn-link" (click)="toggleReplies(comment)" >Replies</button>
+                <div *ngIf="comment.showReplies">
+                <div  *ngFor="let commentt of comments"  >
+                <div *ngIf="commentt.parent && commentt.parent.idComment === comment.idComment" class="row align-items-center" >
+                  <div class="col-auto">
+                    <img
+                    src="https://source.unsplash.com/collection/happy-people"
+                    class="rounded-circle me-1"
+                    alt="avatar"
+                    style="width: 38px; height: 38px; object-fit: cover"
+                  />
+                  </div>
+                <div class="col">
+                  <p  class="m-1 fs-7 bg-gray p-2 rounded">{{ commentt.text }}</p>
+                </div>
+                  
+                 
+                </div>
+              </div>
+            </div>
+               
+              
+              
+              
+            </div>
+              
+              
+              
+          </div>
+          
+          
+        </div>
+          
+        </div>
+        <div class="modal-footer"> 
+            <!--modal.close('Ok click')-->
+          <!--  <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div> -->
+<!-- /.modal-dialog -->
+
+</div>
     
+
