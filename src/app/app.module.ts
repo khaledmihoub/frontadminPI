@@ -20,6 +20,11 @@ import {MatButtonModule} from "@angular/material/button";
 import { ToastComponent } from './toast/toast.component';
 
 
+import { EvenementComponent } from './evenement/evenement.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+
+
 
 import {MatNativeDateModule} from '@angular/material/core';
 import jwt_decode from "jwt-decode";
@@ -94,6 +99,9 @@ export function tokenGetter() {
     ChartsModule,
     NgbModule,
     ToastrModule.forRoot(),
+
+    BsDatepickerModule.forRoot(),
+
     MatSelectModule,
 
     MatDialogModule,
@@ -108,16 +116,19 @@ export function tokenGetter() {
       registrationStrategy: 'registerWhenStable:30000'
     })
 
+
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AssociationComponent,
     LoginComponent,
+
     ProductDetailsComponent,
     ToastComponent,
     ResetComponent,
     ResetpasswordComponent,
+
 
     DossierComponent,
     FichierComponent,

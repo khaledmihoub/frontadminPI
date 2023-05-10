@@ -14,7 +14,8 @@ import { FichierComponent } from '../../fichier/fichier.component';
 import { UserComponent } from '../../user/user.component';
 import { ProductComponent } from '../../product/product.component';
 import { PostComponent } from '../../post/post.component';
-import { EventComponent } from '../../event/event.component';
+
+import { EvenementComponent } from '../../evenement/evenement.component';
 import { OrderComponent } from '../../order/order.component';
 import { PotComponent } from '../../pot/pot.component';
 import { ClaimComponent } from '../../claim/claim.component';
@@ -30,14 +31,18 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'drive',         component: DossierComponent },
     { path: 'fichier',        component: FichierComponent },
     { path: 'table',        component: TableListComponent },
+    { path: 'event',        component: EvenementComponent },
 
     { path: 'user',        component: UserComponent },
     { path: 'product',        component: ProductComponent },
     { path: 'post',        component: PostComponent }  ,
-    { path: 'event',        component: EventComponent }  ,
+  
     { path: 'order',        component: OrderComponent },
     { path: 'pot',        component: PotComponent },
     { path: 'claim',        component: ClaimComponent },
+
+
     { path: 'category',        component: CategoryComponent },
+
 
 ];

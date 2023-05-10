@@ -1,0 +1,289 @@
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Evenement List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th> Title</th>
+                    <th> Detail </th>
+                    <th> Location</th>
+                    <th> Reference </th>
+                    <th> Status </th>
+                    <th> EventDate </th>
+                    <th> EndDate </th>
+                  
+                    <th> Participants </th>
+                    <th> Edit </th>
+                    
+                    
+                    <th> Delete </th>
+                    <th> Reviews </th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr *ngFor = "let event of events" >
+                    <td> {{ event.title }} </td>
+                    <td> {{ event.detail }} </td>
+                    <td> {{ event.location }} </td>
+                    <td> {{ event.reference }} </td>
+                    
+                    <td *ngIf="event.status == 1 "> <span class="badge bg-success">Ongoing</span></td>
+                    <td *ngIf="event.status == 0 ">
+                        <span class="badge bg-danger">Expired</span>
+                      </td>
+                    
+                 <!--   <td> {{ event.status }} </td> -->
+                  
+                    <td> {{ event.eventDate }} </td>
+                    <td> {{ event.endDate }} </td>
+                    <td> {{ event.nombreParticipants }} </td>
+                    
+                    <td> <button  (click)="onSubmitUpdate(event.idEvent!)"  type="button" class="btn btn-default btn-just-icon"style="margin-left: 1px"> <i class="fas fa-pencil-alt"></i> </button> </td>
+                    <td>
+                      <button (click) = "deleteEvent(event.idEvent!)" type="button" class="btn btn-info" style="margin-left: 1px">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button (click) = "getReviews(event.idEvent!)" type="button" class="btn btn-warning" style="margin-left: 1px">
+                        <i class="fas fa-info-circle"></i>
+                      </button>
+                    </td>
+                    
+                    
+                </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <button  (click)="myModal.show() "  type="button" class="btn btn-default btn-just-icon"> <i class="now-ui-icons ui-1_simple-add"></i></button>
+      </div>
+    </div>
+
+
+    <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">Add an Event</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form " (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label> Title</label>
+              <input type="text" class ="form-control" id = "title"
+                  [(ngModel)] = "eventout.title" name = "title" 
+                  
+                  #title="ngModel"
+                  minlength="3"
+                  required>
+                  <div class=" alert alert-danger " *ngIf="title.touched && !title.valid">
+                    <div *ngIf="title.errors?.['required']">required</div>
+                    <div *ngIf="title.errors?.['minlength']">minimum 3 characters</div>
+                  
+  
+          </div>
+                  
+  
+          </div>
+          
+
+
+          
+        <div class="form-group">
+          <label> Detail</label>
+          <input type="text" class ="form-control" id = "detail"
+              [(ngModel)] = "eventout.detail" name = "detail" required>
+              
+
+      </div>
+      <div class="form-group">
+        <label> Location</label>
+        <select class ="form-control" id = "location"
+        [(ngModel)] = "eventout.location" name = "location" 
+        #location="ngModel">
+          <option value="Menzah">Menzah</option>
+          <option value="Sokra">Sokra</option>
+          <option value="Ennasr">Ennasr</option>
+          <option value="Lac">Lac</option>
+          <option value="Ariana">Ariana</option>
+        </select>
+            </div>
+
+          
+            
+            
+
+   
+    <div class="form-group">
+      <label> EventDate</label>
+      <input type="datetime-local" class ="form-control" id = "eventdate"
+          [(ngModel)] = "eventout.eventDate" name = "eventdate"  required>
+          
+  
+  </div>
+ <!--   <div class="form-group">
+      <label> EndDate</label>
+      <input type="text" class ="form-control" id = "enddate"
+          [(ngModel)] = "eventout.endDate" name = "enddate" required>
+          
+
+  </div> -->
+  <label> EndDate</label>
+  <input class="form-control" type="datetime-local" id = "enddate"
+  [(ngModel)] = "eventout.endDate" name = "enddate" required >
+  
+  
+  
+    <label for="image">Upload File</label>
+    <input type="file" class="form-control-file" id="image" name="image" (change)="onFileSelected($event)">
+
+
+  
+
+  
+            
+            <br>
+
+            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Add </button>
+          </form>
+        </div>
+        <div class="modal-footer"> 
+            <!--modal.close('Ok click')-->
+          <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div> 
+<!-- /.modal-dialog -->
+
+</div>
+
+<div bsModal #myModalup="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">Update an Event</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModalup.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form " (ngSubmit)="Update(eventup.idEvent)">
+            <div class="form-group">
+              <label> Title</label>
+              <input type="text" class ="form-control" id = "title"
+                  [(ngModel)] = "eventup.title" name = "title" required>
+                  
+  
+          </div>
+          
+        <div class="form-group">
+          <label> Detail</label>
+          <input type="text" class ="form-control" id = "detail"
+              [(ngModel)] = "eventup.detail" name = "detail" required>
+              
+
+      </div>
+      <div class="form-group">
+        <label> Location</label>
+        <input type="text" class ="form-control" id = "location"
+            [(ngModel)] = "eventup.location" name = "location" required>
+            
+
+    </div>
+    <div class="form-group">
+      <label> EventDate</label>
+      <input type="text" class ="form-control" id = "eventdate"
+          [(ngModel)] = "eventup.eventDate" name = "eventdate" required>
+          
+  
+  </div>
+    <div class="form-group">
+      <label> EndDate</label>
+      <input type="text" class ="form-control" id = "enddate"
+          [(ngModel)] = "eventup.endDate" name = "enddate" required>
+          
+
+  </div>
+  
+            
+            <br>
+
+            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  Update </button>
+          </form>
+        </div>
+        <div class="modal-footer"> 
+            <!--modal.close('Ok click')-->
+          <button type="button" class="btn btn-light" (click)="myModalup.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div> 
+<!-- /.modal-dialog -->
+</div>
+
+<div bsModal #myModalreview="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">Event Reviews</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModalreview.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                      <th> Review</th>
+                     
+                  </tr>
+              </thead>
+              <tbody> 
+          <tr *ngFor = "let review of reviews" >
+            <td> {{ review.review }} </td>
+            
+            
+            
+        </tr>
+
+  
+            
+         
+        <div class="modal-footer"> 
+            <!--modal.close('Ok click')-->
+          <button type="button" class="btn btn-light" (click)="myModalreview.hide()">Cancel</button>
+        </div>
+    
+
+
+<!-- /.modal-dialog -->
+
+
+
+
+
+    
+   
