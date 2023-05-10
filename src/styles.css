@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+::ng-deep.invalid-feedback{
+    display:block !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+ngb-toast {
+  position: absolute !important;
+  z-index: 9999 !important;
+  top: 0 !important;
+  left: 50% !important;
+}
+

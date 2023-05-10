@@ -1,0 +1,111 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" >
+        <div class="card-header">
+          <h4 class="card-title"> List of Deliveries</h4>
+        </div>
+        <div class="card-body">
+          <div class="table">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  id
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Address
+                </th>
+                <th>
+                  Status
+                </th>
+                <th>
+                  Deliverer
+                </th>
+                <th>
+                  order Name
+                </th>
+                <th>
+                  Edit
+                </th>
+              </thead>
+              <tbody *ngFor="let delivery of deliveries" >
+                <td>{{ delivery.id}}</td>
+                <td> {{ delivery.name}}</td>
+                <td>{{ delivery.adress}}</td>
+                <td>{{delivery.status}}</td>
+                <td> {{delivery.email}}</td>
+                <td>{{delivery.orderName}}</td>
+                <td class="text-left">
+                    <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " >
+                    <i class="now-ui-icons shopping_shop"></i>
+                    </button>
+                    <button (click)="openModal(delivery)" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm ">
+                    <i class="now-ui-icons shopping_delivery-fast"></i>
+                    </button>
+                    <button (click)="deleteDelivery(delivery)" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm " >
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                    </td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+    </div>
+  </div>
+
+<div bsModal #myupdateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel" aria-hidden="true">
+    <div class="modal-dialog modal-success" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">update Delivery</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myupdateModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form "  [formGroup]="updateform" (ngSubmit)="updateDelivery(currentDelivery)">
+            <label >Adress</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="Adress" type="text" formControlName="adress">
+            
+ 
+            <label >Status</label>
+            <label style="color:red"></label>
+            <select formControlName="status" class="form-control selectStatus">
+              <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
+            </select>
+
+            <label >Deliverer</label>
+            <label style="color:red"></label>
+            <select formControlName="deliverer" class="form-control selectStatus">
+              <option *ngFor="let deliverer of deliverers" [value]="deliverer.email">{{deliverer.email}}</option>
+            </select>
+
+
+            <button   type="submit" [disabled]="" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin"> </i>  update </button>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+            <!--modal.close('Ok click')-->
+            <button type="button" class="btn btn-light" (click)="myupdateModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+  </div>
+<!-- /.modal-dialog -->
+
+</div>
+</div>
+  
+   

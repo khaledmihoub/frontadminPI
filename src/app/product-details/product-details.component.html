@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Product Details</h1>
+<div mat-dialog-content class="my-dialog-container">
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Title" [(ngModel)]="product.title" name="title" (ngModelChange)="updateProduct()">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description" [(ngModel)]="product.description" name="description" (ngModelChange)="updateProduct()"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="quantity" (ngModelChange)="updateProduct()">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Reference" [(ngModel)]="product.reference" name="reference" (ngModelChange)="updateProduct()">
+    </mat-form-field>
+    <mat-form-field>
+      <span matPrefix>Owner:</span>
+      <span>User</span>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="SubCategory" [(ngModel)]="product.subCategory" name="reference" (ngModelChange)="updateProduct()">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Status" [(ngModel)]="product.status" name="status" (ngModelChange)="updateProduct()">
+        <mat-option value="Available">Available</mat-option>
+        <mat-option value="InAvailable">InAvailable</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <ngb-carousel *ngIf="product.ProductImages">
+    <ng-template ngbSlide *ngFor="let Image of product.ProductImages">
+      <div class="picsum-img-wrapper">
+        <img [src]="Image.url" alt="Random first slide" style="height: 100%; width: 100%"/>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div mat-dialog-actions>
+    <button mat-button color="warn" (click)="deleteProduct()">Delete</button>
+    <button mat-button color="primary" (click)="saveProduct()">Save</button>
+    <button mat-button (click)="closeDialog()">Close</button>
+  </div>
+</div>

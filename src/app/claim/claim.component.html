@@ -1,0 +1,162 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Claims Table</h4>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <input type="text" placeholder="Search..." class="form-control" [(ngModel)]="searchTerm" />
+            </div>
+          </div>
+          <div class="table">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Reference
+                </th>
+                <th>
+                  Created date
+                </th>
+                <th>
+                  Owner
+                </th>
+                <th>
+                  About
+                </th>
+                <th>
+                  Status
+                </th>
+                <th *ngIf="editMode"></th>
+                <th class="text-right">
+                  Action
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let claim of claims" >
+                  <td [ngStyle]="{ color: claim.status === 'Pending' ? 'red' : 'inherit'  }"  [style.font-weight]="claim.status === 'Pending' ? 'bold' : 'normal'">
+                   {{claim.reference}}
+                  </td>
+                  <td>
+                    {{claim.createDateTime | date:'dd-MM-yyyy'}}
+                  </td>
+                  <td>
+                    {{ claim.user.name }} {{ claim.user.lastname}}
+                  </td>
+                  <td>
+                    <ng-container *ngIf="claim.reference.startsWith('C')">Claim</ng-container>
+                    <ng-container *ngIf="claim.reference.startsWith('POT')">Pot</ng-container>
+                    <ng-container *ngIf="claim.reference.startsWith('POST')">Post</ng-container>
+                    <ng-container *ngIf="claim.reference.startsWith('PROD')">Product</ng-container>
+                    <ng-container *ngIf="claim.reference.startsWith('EVENT')">Event</ng-container>
+                  </td>
+                  <td>
+                    <span *ngIf="!editMode">{{ claim.status }}</span>
+                    <div *ngIf="editMode">
+                        <div class="form-group">
+                          <select class="form-control" [(ngModel)]="claim.newStatus" >
+
+                            <option [selected]="claim.newStatus === 'Pending'" [Value]="'Pending'" >Pending</option>
+
+                            <option [selected]="claim.newStatus === 'In progress'" [Value]="'In progress'">In progress</option>
+
+                            <option [selected]="claim.newStatus === 'Completed'" [Value]="'Completed'" >Completed</option>
+
+                          </select>
+                        </div>
+                    </div>
+
+                  </td>
+                  <td *ngIf="editMode">
+                    <button type="submit" class="btn btn-success btn-sm" (click)="onStatusSave($event, claim)">Save</button>
+                    <button type="button" class="btn btn-neutral btn-sm c" (click)="onCancel()">Cancel</button>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" class="btn btn-neutral btn-sm pt "  (click)="editMode = true"><i class="now-ui-icons loader_gear"></i></button>
+                    <button type="button" class="btn btn-neutral btn-sm pt " (click)="openModal(claim) "><i class="now-ui-icons arrows-1_share-66"></i></button>
+                    <button type="button" class="btn btn-neutral btn-sm pt " (click)="openchatModal(claim) "><i class="now-ui-icons business_bulb-63"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div bsModal #myModal="bs-modal" id="model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-success" role="document">
+      <div *ngIf="currentClaim" class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title c4" id="modal-title">Claim reference : {{ currentClaim.reference }}</h4>
+              <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div  class="modal-body">
+            <h4 class="modal-title"></h4>
+            <div class="modal-body">
+             Date: <p>{{ currentClaim.createDateTime | date:'dd-MM-yyyy' }}</p>
+             User: <p>{{ currentClaim.user.name }} {{ currentClaim.user.lastname }}</p>
+             Status: <p>{{ currentClaim.status }}</p>
+             Claim: <p>{{ currentClaim.claim }}</p>
+              <!-- Add more fields as needed -->
+
+
+          </div>
+          <div class="modal-footer">
+              <!--modal.close('Ok click')-->
+              <button type="button" class="btn btn-primary" (click)="myModal.hide()">OK</button>
+              <button type="button" class="btn btn-neutral" (click)="contratsToPdf(currentClaim)">Print</button>
+          </div>
+      </div>
+
+  </div>
+  <!-- /.modal-dialog -->
+
+  </div>
+</div>
+
+  <div bsModal #mychatModal="bs-modal" class="modal fade modal-bottom-right" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+  aria-hidden="true" style="padding-left: 17px;">
+
+   <div class="modal-dialog modal-bottom-right" role="document">
+    <div class="modal-content m">
+      <form [formGroup]="sendmail" (ngSubmit)="send()">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" aria-describedby="modal-title" (click)="mychatModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name" formControlName="email" readonly>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label txt">Message:</label>
+            <textarea class="form-control" placeholder="Type here.." id="message-text" formControlName="message" style="resize: vertical; height: 250px;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="mychatModal.hide()">Close</button>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  </div>
+
+
+</div>
+

@@ -1,0 +1,98 @@
+<div class="panel-header panel-header-sm tt">
+</div>
+<div class="main-content">
+
+  <div class="row">
+
+    <div *ngFor="let dossier of dos" class="col-md-3">
+      <div class="card card-user">
+        <div class="card-body">
+          <div class="author">
+            <a class="pointer" (dblclick)="fctdbl(dossier._id)">
+              <img class="avatar border-gray" src="../assets/img/folder.png" width="80%" alt="...">
+              <h5  class="title">{{dossier.nom_dossier}}</h5>
+            </a>
+            <p class="description">
+              Ouvrir
+            </p>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+    </div>
+    <div class="col-md-1">
+      <button (click)="myModal.show()" class="btn btn-primary btn-fab btn-icon btn-round" >
+        <i class="now-ui-icons ui-1_simple-add"></i>
+      </button>
+    </div>
+  </div>
+  </div>
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">Créer un dossier</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form "  [formGroup]="ajoutform" (ngSubmit)="ajout()">
+            <label >Nom du dossier</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="text" formControlName="nom_dossier">
+
+            <button   type="submit" [disabled]="ajoutform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin">       </i>   Créer le dossier </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <!--modal.close('Ok click')-->
+            <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div>
+<!-- /.modal-dialog -->
+
+</div>
+<div bsModal #myModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel2"
+aria-hidden="true">
+<div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title c4" id="modal-title">liste des fichiers</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form role="form "  [formGroup]="ajoutform" (ngSubmit)="ajout()">
+            <label >Nom du dossier</label>
+            <label style="color:red"></label>
+            <input class="form-control" placeholder="" type="text" formControlName="nom_dossier">
+
+            <button   type="submit" [disabled]="ajoutform.invalid" class="btn btn-primary mt-4"> <i class="ni ni-badge iconmargin">       </i>   Créer le dossier </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <!--modal.close('Ok click')-->
+            <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+        </div>
+    </div>
+
+</div>
+<!-- /.modal-dialog -->
+
+</div>
+
+
+
+

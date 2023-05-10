@@ -1,0 +1,4 @@
+.sidebar .nav li.active>a, .sidebar .nav li.active-pro>a, .off-canvas-sidebar .nav li.active>a, .off-canvas-sidebar .nav li.active-pro>a {
+  background-color: rgb(199, 44, 44);
+  box-shadow: 0 1px 15px 1px #2727271a;
+}

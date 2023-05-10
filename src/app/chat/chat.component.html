@@ -1,0 +1,94 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" >
+        <div class="card-header">
+          <h4 class="card-title"> Public Chats</h4>
+        </div>
+        <div class="card-body">
+          <div class="table">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Sender
+                </th>
+                <th>
+                  reciever
+                </th>
+                <th>
+                  message
+                </th>
+                <th>
+                  date
+                </th>
+                <th>
+                  status
+                </th>
+              </thead>
+              <tbody *ngFor="let chat of publicChats" >
+                <td>{{ chat.senderName}}</td>
+                <td>PUBLIC</td>
+                <td>{{ chat.message}}</td>
+                <td>{{chat.date}}</td>
+                <td> {{chat.status}}</td>
+                <td class="text-left">
+                    <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " >
+                    <i class="now-ui-icons shopping_shop"></i>
+                    </button>
+                    </td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" >
+        <div class="card-header">
+          <h4 class="card-title"> Private Chats</h4>
+        </div>
+        <div class="card-body">
+          <div class="table">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Sender
+                </th>
+                <th>
+                  reciever
+                </th>
+                <th>
+                  message
+                </th>
+                <th>
+                  date
+                </th>
+                <th>
+                  status
+                </th>
+              </thead>
+              <tbody *ngFor="let chat of privateChats" >
+                <td>{{chat.senderName}}</td>
+                <td>{{chat.receiverName}}</td>
+                <td>{{chat.message}}</td>
+                <td>{{chat.date}}</td>
+                <td> {{chat.status}}</td>
+                <td class="text-left">
+                    <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " >
+                    <i class="now-ui-icons shopping_shop"></i>
+                    </button>
+                    </td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+   
