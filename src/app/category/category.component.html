@@ -1,0 +1,176 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" style="width: 1200px;">
+        <div class="card-header">
+          <h4 class="card-title"> List of Categories</h4>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <input type="text" placeholder="Search..." class="form-control" [(ngModel)]="searchTerm" />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                SubCategories
+              </th>
+              <th>
+                Actions
+              </th>
+              </thead>
+              <tbody *ngFor="let category of categories" >
+              <tr>
+                <td>
+                  {{ category.idCategory }}
+                </td>
+                <td>
+                  <div *ngIf="EditCat" style="width: fit-content ">
+                    <input class="form-control" placeholder="" type="text"  [(ngModel)]="category.name">
+                  </div>
+                  <div *ngIf="!EditCat || EditCatId != category.idCategory">
+                    {{ category.name }}
+                  </div>
+                </td>
+                <td>
+                  <div style="display: flex; flex-direction: column;" *ngFor="let subcategory of category.subcategories">
+                    <div *ngIf="!EditSub || EditSubId != subcategory.idSubCategory" >
+                      {{ subcategory.name}}
+                      <button type="button" class="btn btn-neutral btn-sm pt "  (click)="EditSub = true; EditSubId = subcategory.idSubCategory"><i class="now-ui-icons loader_gear"></i></button>
+                    </div>
+                    <div *ngIf="EditSub && EditSubId == subcategory.idSubCategory " >
+                      <input class="form-control" placeholder="" type="text" [(ngModel)]="subcategory.name">
+                      <mat-icon (click)="subcategory.category = category; EditSubCategory(subcategory.idSubCategory,subcategory.name)">save</mat-icon>
+                      <mat-icon color="warn" (click)="deleteSubCategory(subcategory.idSubCategory)">delete</mat-icon>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <i class="now-ui-icons ui-1_simple-add" style="color: #dd4b39"  (click)="myModal1.show(); SubCategoryToAdd.category = category;" > </i>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="!EditCat || EditCatId != category.idCategory">
+                    <button type="button" class="btn btn-neutral btn-sm pt "  (click)="EditCat = true; EditCatId = category.idCategory"><i class="now-ui-icons loader_gear"></i></button>
+                  </div>
+                  <div *ngIf="EditCat && EditCatId == category.idCategory">
+                    <mat-icon (click)="EditCategory(category)">save</mat-icon>
+                    <mat-icon color="warn" (click)="deleteCategory(category.idCategory)">delete</mat-icon>
+                  </div>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+
+
+            <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-success" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title c4" id="modal-title1">Add a Category</h4>
+                    <button type="button" class="close" aria-describedby="modal-title" (click)="myModal.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form"  (ngSubmit)="addCategory()">
+                      <label >Title</label>
+                      <label style="color:red"></label>
+                      <input class="form-control" placeholder="Category Name" type="text" [(ngModel)]="CategoryToAdd.name">
+                      <button type="submit"  class="btn btn-primary mt-4">
+                        <i class="ni ni-badge iconmargin"></i> Add
+                      </button>
+                    </form>
+                  </div>
+
+                  <div class="modal-footer">
+                    <!--modal.close('Ok click')-->
+                    <button type="button" class="btn btn-light" (click)="myModal.hide()">Cancel</button>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.modal-dialog -->
+
+            </div>
+
+
+
+
+
+            <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-success" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title c4" id="modal-title2">Add a SubCategory</h4>
+                    <button type="button" class="close" aria-describedby="modal-title" (click)="myModal1.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form"  (ngSubmit)="addSubCategory()">
+                      <label >Title</label>
+                      <label style="color:red"></label>
+                      <input class="form-control" placeholder="SubCategory Name" type="text" [(ngModel)]="SubCategoryToAdd.name">
+                      <button type="submit"  class="btn btn-primary mt-4">
+                        <i class="ni ni-badge iconmargin"></i> Add
+                      </button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <!--modal.close('Ok click')-->
+                    <button type="button" class="btn btn-light" (click)="myModal1.hide()">Cancel</button>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div>
+          <button (click)="myModal.show() " type="button" class="btn btn-default btn-just-icon"> <i class="now-ui-icons ui-1_simple-add"></i></button>
+          <button (click)="Stats.show()"  type="button" class="btn btn-default btn-just-icon"> <i class="fa fa-bar-chart"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #Stats="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalaccLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title c4" id="modal-title23">Statistics</h4>
+        <button type="button" class="close" aria-describedby="modal-title" (click)="Stats.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-statistics></app-statistics>
+      </div>
+      <div class="modal-footer">
+        <!--modal.close('Ok click')-->
+        <button type="button" class="btn btn-light" (click)="Stats.hide()">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.modal-dialog -->
+</div>

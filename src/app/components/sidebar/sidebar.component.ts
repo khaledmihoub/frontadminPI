@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 declare interface RouteInfo {
     path: string;
@@ -13,11 +14,19 @@ export const ROUTES: RouteInfo[] = [
     { path: '/post', title: 'Posts',  icon:'users_single-02', class: '' },
     { path: '/event', title: 'Event',  icon:'users_single-02', class: '' },
     { path: '/order', title: 'Order',  icon:'users_single-02', class: '' },
-    { path: '/pot', title: 'Pot',  icon:'users_single-02', class: '' },
-    { path: '/claim', title: 'Claim',  icon:'users_single-02', class: '' },
+    { path: '/pot', title: 'Pot',  icon:'business_money-coins', class: '' },
+    { path: '/claim', title: 'Claim',  icon:'files_paper', class: '' },
+    { path: '/category', title: 'Category',  icon:'business_money-coins', class: '' },
 
 ];
+export const ROUTESASS: RouteInfo[] = [
+  { path: '/ass/product', title: 'Products',  icon:'users_single-02', class: '' },
+  { path: '/ass/post', title: 'Posts',  icon:'users_single-02', class: '' },
+  { path: '/ass/event', title: 'Event',  icon:'users_single-02', class: '' },
+  { path: '/ass/order', title: 'Order',  icon:'users_single-02', class: '' },
+  { path: '/ass/pot', title: 'Pot',  icon:'business_money-coins', class: '' },
 
+];
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -26,10 +35,15 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() { }
+  constructor(private ls: UserService) { }
 
   ngOnInit() {
+    if (this.ls.isLoggedInAdmin()){
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+  }else if (this.ls.isLoggedInAss()){
+    this.menuItems = ROUTESASS.filter(menuItem => menuItem);
+  }
   }
   isMobileMenu() {
       if ( window.innerWidth > 991) {
