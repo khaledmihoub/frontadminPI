@@ -35,7 +35,7 @@
                   {{ category.idCategory }}
                 </td>
                 <td>
-                  <div *ngIf="EditCat" style="width: fit-content ">
+                  <div *ngIf="EditCat && EditCatId == category.idCategory" style="width: fit-content ">
                     <input class="form-control" placeholder="" type="text"  [(ngModel)]="category.name">
                   </div>
                   <div *ngIf="!EditCat || EditCatId != category.idCategory">

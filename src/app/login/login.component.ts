@@ -39,7 +39,7 @@ message="";
                   console.log(statue+"aaaaaaaaaa");
 
           console.log(statue+"aaaaaaaaaa");
-          if (decoded.role == "admin" && statue == 1){
+          if (decoded.role == "admin" && (statue == 1 ||statue == 3) ){
                 console.log(decoded.role);
                 this._router.navigate(['/dashboard']);
                 //redirection dashbord

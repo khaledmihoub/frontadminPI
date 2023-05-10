@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Product} from '../models/Product';
+import {Product} from '../Models/Product';
 import {ProductService} from '../services/product/product.service';
 import {MatDialog} from "@angular/material/dialog";
 import {ToastService} from '../_services/toast.service';
@@ -239,6 +239,14 @@ export class ProductComponent implements OnInit {
   }
 
   updateProduct() {
+    // Filter subcategories based on the selected category
+    this.filteredSubCategories = this.currentCategory.subcategories;
+    console.log(this.currentCategory)
+    // Set default value for currentProduct.subcategory
+    if (this.filteredSubCategories.length > 0) {
+      this.currentProduct.subcategory = this.filteredSubCategories[0];
+    }
+    console.log(this.filteredSubCategories)
 
 
   }

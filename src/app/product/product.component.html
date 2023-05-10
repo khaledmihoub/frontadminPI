@@ -123,11 +123,11 @@
                       <label>Sub Category</label>
                       <label style="color:#20c997"></label>
                       <div style="display: flex">
-                        <select [(ngModel)]="currentCategory" (ngModelChange)="updateProduct()" class="form-control" [ngModelOptions]="{standalone: true}">>
+                        <select [(ngModel)]="currentCategory" (ngModelChange)="updateProduct()" class="form-control" [ngModelOptions]="{standalone: true}" name="currentCategory">
                           <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
                         </select>
 
-                        <select [(ngModel)]="productToAdd.subcategory" (ngModelChange)="updateProduct()" class="form-control" [ngModelOptions]="{standalone: true}" >
+                        <select [(ngModel)]="productToAdd.subcategory" (ngModelChange)="updateProduct()" class="form-control" name="subcategory" [ngModelOptions]="{standalone: true}" >
                           <option *ngFor="let subcategory of filteredSubCategories" [ngValue]="subcategory" >{{ subcategory.name }}</option>
                         </select>
                       </div>
@@ -190,13 +190,12 @@
                       <input class="form-control" placeholder="" type="text" [value]="currentProduct.user.name" readonly>
                       <label>Sub Category</label>
                       <div style="display: flex">
-                        <select [(ngModel)]="currentCategory" (ngModelChange)="updateProduct()" class="form-control" [compareWith]="compareCategories" required>
+                        <select [(ngModel)]="currentCategory" (ngModelChange)="updateProduct()" class="form-control" [ngModelOptions]="{standalone: true}" name="currentCategory">
                           <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
                         </select>
-                        <select [(ngModel)]="productToAdd.subcategory" (ngModelChange)="updateProduct()" class="form-control" [compareWith]="compareSubcategories" required>
-                          <option *ngFor="let subcategory of filteredSubCategories" [value]="subcategory">
-                            {{subcategory.name}}
-                          </option>
+
+                        <select [(ngModel)]="productToAdd.subcategory" (ngModelChange)="updateProduct()" class="form-control" name="subcategory" [ngModelOptions]="{standalone: true}" >
+                          <option *ngFor="let subcategory of filteredSubCategories" [ngValue]="subcategory" >{{ subcategory.name }}</option>
                         </select>
                       </div>
                       <div>
