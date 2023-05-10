@@ -23,15 +23,20 @@ export class EvenementComponent implements OnInit {
   @ViewChild('myModalup') myModalup: ModalDirective;
   @ViewChild('myModalreview') myModalreview: ModalDirective;
   date: '';
+  jwt : string;
+  iduser:number;
 
   
   constructor(private evenementService: EvenementService ,private router: Router ,
-    private route: ActivatedRoute) { 
-      
+    private route: ActivatedRoute //,private cs:CookiesService
+    ) { 
+    //  this.jwt=this.cs.getCookieJWT().toString();
+    //  this.iduser=this.cs.getCookieIDUser();
     }
   
 
   ngOnInit(): void {
+    this.evenementService.auth(this.jwt);
    
     this.getEvenements();
    
@@ -129,6 +134,7 @@ export class EvenementComponent implements OnInit {
     };
  
 }
+/*
 getCurrentDateTime(): string {
   const now = new Date();
   const year = now.getFullYear();
@@ -137,6 +143,6 @@ getCurrentDateTime(): string {
   const hour = now.getHours().toString().padStart(2, '0');
   const minute = now.getMinutes().toString().padStart(2, '0');
   return `${year}-${month}-${day}T${hour}:${minute}`;
-}
+}*/
 
 }

@@ -1,4 +1,4 @@
-{/*
+{
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
@@ -11,26 +11,10 @@
       "dom"
     ],
   },
-  "exclude": [
+  "exclude": [  
     "test.ts",
     "**//*.spec.ts"
-  ]*/
-  
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "module": "esnext",
-    "baseUrl": "",
-    "types": [],
-    "target": "es2017", // set the target to es2017
-    "lib": [
-      "es2017", // add es2017 to the lib array
-      "dom"
-    ],
-  },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
   ]
+  
 
 }
